@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>字符识别-首页</title>
+</head>
+<body>
+	<h2>芯片图表面字符识别：</h2>
+	<form action="/recognition" method="post" enctype="multipart/form-data"
+	>
+		{% csrf_token %}
+		<div>图片：<input type="file" name="img" multiple="multiple" ></div>
+		<p><input type="submit" value="提交" /></p>
+	</form>
+	<hr>
+	<h2>数据集训练：</h2>
+	<form action="/train" method="post" enctype="multipart/form-data"
+	>
+		{% csrf_token %}
+		<div>训练次数：<input type="text" name="trainTimes"></div>
+		<p><input type="submit" value="提交" /></p>
+	</form>
+</body>
+</html>
