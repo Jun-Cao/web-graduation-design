@@ -21,7 +21,7 @@ def read_image(path):
 
 def recognition():    
     sess = tf.InteractiveSession()    
-#模型恢复  
+    #模型恢复  
     saver=tf.train.import_meta_graph('D:/web/web-graduation-design/mysite/mysite/model_data/model.meta')  
    
     saver.restore(sess, 'D:/web/web-graduation-design/mysite/mysite/model_data/model') 

@@ -21,5 +21,4 @@ urlpatterns = [
     url(r'^$', view.index),
     url(r'^recognition$', view.postImg),
     url(r'^train$', view.train),
-
 ]

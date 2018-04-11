@@ -1,0 +1,123 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: arvo;
+	box-sizing: border-box;
+	color: #34495e;
+}
+html, body{
+	width: 100%;
+	height: 100%;
+}
+.main{
+	width: 100%;
+	height: 100%;
+}
+.home{
+	width: 100%;
+	height: 100%;
+	font-size: 30px;
+	text-align: center;
+	line-height: 100%;
+	background-image: url(../img/bg.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.home-title{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	color: #fff;
+	transform: translate(-50%, -50%);
+}
+.content{
+	width: 100%;
+	height: 200px;
+}
+.clearfix:after{
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.icon-down{
+	position: absolute;
+	left: 50%;
+	bottom: 7%;
+	transform: translateX(-50%);
+	width: 80px;
+	height: 80px;
+	background: url(../img/arrow.png) no-repeat;
+}
+.nav-box{
+	padding: 0 80px;
+	height: 60px;
+	width: 100%;
+	background: #ecf0f1;
+}
+.nav-li{
+	display: inline-block;
+	width: 170px;
+	height: 100%;
+	padding: 0 20px;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 60px;
+	text-align: center;
+}
+.nav-li.active{
+	border-bottom: 3px solid #5FB878;
+}
+.middle-btn{
+	width: 200px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-radius: 3px;
+	color: #ffffff;
+	cursor: pointer;
+}
+.content-box{
+	margin: 20px auto;
+	width: 80%;
+}
+.select-wrapper{
+	width: 100%;
+}
+.select-wrapper div{
+	display: inline-block;
+	font-size: 0px;
+}
+.upload-btn{
+	float: right;
+	margin-top: 20px;
+	background: #0099CC;
+}
+.plus-icon{
+	margin: 0px 30px;
+	width: 100px;
+	height: 100px;
+	vertical-align: top;
+	border: 1px dashed #bbbbbb;
+	background: url(../img/plus.png) no-repeat center center;
+	background-size:  80px 80px ;
+	cursor: pointer;
+}
+.select-area{
+	width: calc(100% - 165px);
+	min-height: 400px;
+	max-height: 800px;
+	vertical-align: top;
+	border: 1px dashed #bbbbbb;
+
+}
+.undisplay{
+	display: none;
+}
+.from-text{
+	padding: 5px 15px;
+	width: 200px;
+	height: 30px;
+	border: 1px solid #bbbbbb;
+}

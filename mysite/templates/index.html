@@ -2,22 +2,57 @@
 <html>
 <head>
 	<title>字符识别-首页</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/index.css">
 </head>
 <body>
-	<h2>芯片图表面字符识别：</h2>
-	<form action="/recognition" method="post" enctype="multipart/form-data"
-	>
-		{% csrf_token %}
-		<div>图片：<input type="file" name="img" multiple="multiple" ></div>
-		<p><input type="submit" value="提交" /></p>
-	</form>
-	<hr>
-	<h2>数据集训练：</h2>
-	<form action="/train" method="post" enctype="multipart/form-data"
-	>
-		{% csrf_token %}
-		<div>训练次数：<input type="text" name="trainTimes"></div>
-		<p><input type="submit" value="提交" /></p>
-	</form>
+
+	<div class="main">
+		<div class="home">
+			<p class="home-title">Image Recognition Based On Convolution Neural Network</p>
+			<div class="icon-down"></div>
+		</div>
+		<div class="content">
+			<header>
+				<div class="nav-box">
+					<ul>
+						<li class="nav-li active">recognition</li>
+						<li class="nav-li">training</li>
+					</ul>
+				</div>
+			</header>
+			<section>
+				<div class="content-box clearfix">
+					<div class="select-wrapper">
+						<div class="plus-icon" id="select-btn"></div>
+						<div class="select-area"></div>
+					</div>
+					<div class="middle-btn upload-btn" id="upload-btn">Upload</div>
+					<div class="undisplay">
+						<h2>芯片图表面字符识别：</h2>
+						<form action="/recognition" method="post" enctype="multipart/form-data"
+						>
+							{% csrf_token %}
+							<div>图片：<input type="file" name="img" multiple="multiple" id="form-select"></div>
+							<p><input type="submit" value="提交" id="form-upload"/></p>
+						</form>
+						<hr>
+						<h2>数据集训练：</h2>
+					</div>
+				</div>
+				<div class="content-box">
+					<form action="/train" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div>training times：<input class="from-text" type="text" name="trainTimes"></div>
+						<p><input type="submit" value="提交" class="middle-btn" /></p>
+					</form>
+				</div>
+			</section>
+		</div>
+
+
+
+	</div>
+	<script type="text/javascript" src="../static/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../static/js/index.js"></script>
 </body>
 </html>
