@@ -12,7 +12,7 @@ def index(request):
 	return render(request, 'index.html', context)
 
 def postImg(request):
-	imgPath = "D:\web\web-graduation-design\mysite\mysite\images"
+	imgPath = os.path.dirname(__file__) + "\images"
 
 	if request.method == "POST":
 		myFile = request.FILES.get("img", None)
@@ -27,14 +27,21 @@ def postImg(request):
 		chunk = myFile.read()
 		destination.write(chunk)
 		destination.close()
-
-		print('上传成功')
-
 		res = recognize.recognition()
 
 		shutil.rmtree(imgPath)
 		os.mkdir(imgPath)
-		return HttpResponse("识别结果为：" + str(res))
+		if len(res[0]) == len(res[1]):
+			context = {
+				'len': range(len(res[0])),
+				'path': res[0],
+				'char': res[1]
+			}
+			print(context)
+			return render(request, 'showRecon.html', context)
+		else:
+			return HttpResponse("识别错误")
+
 
 def train(request):
 	if request.POST:
@@ -44,5 +51,6 @@ def train(request):
 		# context['times'] = times
 		if res:
 			return HttpResponse("训练次数为：" + times + "，训练成功")
+
 
 

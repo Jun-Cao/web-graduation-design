@@ -9,48 +9,47 @@
 	<div class="main">
 		<div class="home">
 			<p class="home-title">Image Recognition Based On Convolution Neural Network</p>
-			<div class="icon-down"></div>
+			<div class="icon-down" id="icon-down"></div>
 		</div>
-		<div class="content">
-			<header>
+		<header>
 				<div class="nav-box">
 					<ul>
 						<li class="nav-li active">recognition</li>
 						<li class="nav-li">training</li>
 					</ul>
 				</div>
-			</header>
-			<section>
-				<div class="content-box clearfix">
-					<div class="select-wrapper">
-						<div class="plus-icon" id="select-btn"></div>
-						<div class="select-area"></div>
-					</div>
-					<div class="middle-btn upload-btn" id="upload-btn">Upload</div>
-					<div class="undisplay">
-						<h2>芯片图表面字符识别：</h2>
-						<form action="/recognition" method="post" enctype="multipart/form-data"
-						>
-							{% csrf_token %}
-							<div>图片：<input type="file" name="img" multiple="multiple" id="form-select"></div>
-							<p><input type="submit" value="提交" id="form-upload"/></p>
-						</form>
-						<hr>
-						<h2>数据集训练：</h2>
-					</div>
+		</header>
+		<div class="content">
+			<div class="content-box function-list clearfix">
+				<div class="select-wrapper">
+					<div class="plus-icon" id="select-btn"></div>
+					<div class="select-area"></div>
 				</div>
-				<div class="content-box">
-					<form action="/train" method="post" enctype="multipart/form-data">
+				<div class="middle-btn mask-btn upload-btn" id="upload-btn">Upload</div>
+				<div class="undisplay">
+					<h2>芯片图表面字符识别：</h2>
+					<form action="/recognition" method="post" enctype="multipart/form-data"
+					>
 						{% csrf_token %}
-						<div>training times：<input class="from-text" type="text" name="trainTimes"></div>
-						<p><input type="submit" value="提交" class="middle-btn" /></p>
+						<div>图片：<input type="file" name="img" multiple="multiple" id="form-select"></div>
+						<p><input type="submit" value="submit" id="form-upload"/></p>
 					</form>
+					<hr>
 				</div>
-			</section>
+			</div>
+			<div class="content-box function-list undisplay">
+				<form action="/train" method="post" enctype="multipart/form-data" class="train-form">
+					{% csrf_token %}
+					<div class="form-li form-text-wrapper"><span>training times：</span><input class="from-text" type="text" name="trainTimes"></div>
+					<p class="form-li form-handin-wrapper"><input type="submit" value="submit" class="middle-btn mask-btn form-handin" /></p> 
+				</form>
+			</div>
 		</div>
-
-
-
+		<div id="mask-plugin">
+			<div class="mask"></div>
+			<div class="loading-icon"></div>
+			<div class="loading-text">可能需要几分钟,请勿关闭</div>
+		</div>
 	</div>
 	<script type="text/javascript" src="../static/js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="../static/js/index.js"></script>

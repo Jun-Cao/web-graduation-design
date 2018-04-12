@@ -11,20 +11,22 @@ import glob
 #读取图片及其标签函数
 def read_image(path):
     images = []
+    imgSrc = []
     for img in glob.glob(path+'/*.tif'):
-        print("reading the image:%s"%img)
         image = io.imread(img)
         image = transform.resize(image,(32,32,1))
         image = np.reshape(image , [-1,32,32,1])
         images.append(image)
-    return np.asarray(images,dtype=np.float32)
+        imgSrc.append(img)
+
+    return np.asarray(images,dtype=np.float32), imgSrc
 
 def recognition():    
     sess = tf.InteractiveSession()    
     #模型恢复  
-    saver=tf.train.import_meta_graph('D:/web/web-graduation-design/mysite/mysite/model_data/model.meta')  
+    saver=tf.train.import_meta_graph(os.path.dirname(__file__) + "/model_data/model.meta")  
    
-    saver.restore(sess, 'D:/web/web-graduation-design/mysite/mysite/model_data/model') 
+    saver.restore(sess, os.path.dirname(__file__) + "/model_data/model") 
     graph = tf.get_default_graph()  
       
     # 获取输入tensor,,获取输出tensor  
@@ -32,18 +34,8 @@ def recognition():
     y_ = sess.graph.get_tensor_by_name("y_:0")  
     results = sess.graph.get_tensor_by_name("results:0") 
   
-    # la = [2]
-    # im = io.imread('./images/D.tif')
 
-    # #调整大小    
-    # im = transform.resize(im,(32,32,1)) 
-    # im = np.reshape(im , [-1,32,32,1])
-
-    # #类型转换
-    # im = np.asarray(im,dtype=np.float32) 
-    # la = np.asarray(la,dtype=np.int32)
-
-    path = "D:/web/web-graduation-design/mysite/mysite/images/"
+    path = os.path.dirname(__file__) + "/images/"
     switch = {
         '[0]': '0',
         '[1]': '1',
@@ -67,14 +59,16 @@ def recognition():
         '[19]': 'T',
         '[21]': 'Y',
     }
-    result = []
-    dataArr = read_image(path)
-    print('单图测试：')
+    resArr = []
+
+    dataArr, pathArr = read_image(path)
     for data in dataArr:
         res = sess.run(results, feed_dict={x:data,y_:[]})
         res = str(res)
-        result.append(switch[res])
-    print('识别结果为：', result)
+        resArr.append(switch[res])
+    
+    both = [pathArr, resArr]
+    print('识别结果为：', both)
     #关闭会话    
     sess.close()
-    return result  
+    return both

@@ -13,8 +13,8 @@ def main(times):
     c = 1
 
     #mnist数据集中训练数据和测试数据保存地址
-    train_path = "D:/web/web-graduation-design/mysite/mysite/icmt/train/"
-    test_path = "D:/web/web-graduation-design/mysite/mysite/icmt/test/"
+    train_path = os.path.dirname(__file__) + "/icmt/train/"
+    test_path = os.path.dirname(__file__) + "/icmt/test/"
 
     #读取图片及其标签函数
     def read_image(path):
@@ -165,7 +165,7 @@ def main(times):
 
         #保存模型
         saver = tf.train.Saver()   
-        saver.save(sess, "model_data/model")
+        saver.save(sess, os.path.dirname(__file__) + "/model_data/model")
         print("模型保存成功")
     return True
 

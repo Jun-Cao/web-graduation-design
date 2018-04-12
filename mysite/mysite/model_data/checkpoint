@@ -1,2 +1,2 @@
-model_checkpoint_path: "model"
-all_model_checkpoint_paths: "model"
+model_checkpoint_path: "D:\\web\\web-graduation-design\\mysite\\mysite/model_data/model"
+all_model_checkpoint_paths: "D:\\web\\web-graduation-design\\mysite\\mysite/model_data/model"

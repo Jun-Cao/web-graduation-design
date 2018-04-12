@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>字符识别-结果展示</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/index.css">
+</head>
+<body>
+	<ul class="table-content">
+		<li class="table-header">
+			<div class="header-item">image</div>
+			<div class="header-item">result</div>
+		</li>
+	{% for i in len %}
+		<li class="table-body">
+			<div class="body-item">
+				<img src={{path.counter0}}>
+			</div>
+			<div class="body-item">{{char.counter0}}</div>
+		</li>
+	{% endfor %}
+	</ul>
+	<a href="#"></a>
+</body>
+</html>
