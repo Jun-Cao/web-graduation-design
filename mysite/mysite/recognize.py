@@ -11,15 +11,22 @@ import glob
 #读取图片及其标签函数
 def read_image(path):
     images = []
-    imgSrc = []
-    for img in glob.glob(path+'/*.tif'):
+
+    toReconArr = []
+    toShowArr = []
+    for item in os.listdir(path):
+        toRecon = path + item
+        toReconArr.append(toRecon)
+        toShow = "../static/save/" + item
+        toShowArr.append(toShow)
+
+    for img in toReconArr:
         image = io.imread(img)
         image = transform.resize(image,(32,32,1))
         image = np.reshape(image , [-1,32,32,1])
         images.append(image)
-        imgSrc.append(img)
 
-    return np.asarray(images,dtype=np.float32), imgSrc
+    return np.asarray(images,dtype=np.float32), toShowArr
 
 def recognition():    
     sess = tf.InteractiveSession()    
@@ -35,7 +42,7 @@ def recognition():
     results = sess.graph.get_tensor_by_name("results:0") 
   
 
-    path = os.path.dirname(__file__) + "/images/"
+    path = os.path.dirname(__file__) + "/../static/save/"
     switch = {
         '[0]': '0',
         '[1]': '1',
@@ -59,15 +66,18 @@ def recognition():
         '[19]': 'T',
         '[21]': 'Y',
     }
-    resArr = []
 
-    dataArr, pathArr = read_image(path)
-    for data in dataArr:
+    showArr = [] #存储路径的数组
+    resArr = [] #存储结果的数组
+
+    dataArr, showArr = read_image(path)
+    for data in dataArr:    #将结果添加到数组
         res = sess.run(results, feed_dict={x:data,y_:[]})
         res = str(res)
         resArr.append(switch[res])
-    
-    both = [pathArr, resArr]
+
+
+    both = [showArr, resArr]
     print('识别结果为：', both)
     #关闭会话    
     sess.close()

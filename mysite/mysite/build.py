@@ -153,7 +153,7 @@ def main(times):
         train_num = int(times)
         batch_size = 64
 
-
+        html = []
         for i in range(train_num):
 
             train_loss,train_acc,batch_num = 0, 0, 0
@@ -161,12 +161,16 @@ def main(times):
                 _,err,acc = sess.run([train_op,loss,accuracy],feed_dict={x:train_data_batch,y_:train_label_batch})
                 train_loss+=err;train_acc+=acc;batch_num+=1
             print("train loss:",train_loss/batch_num)
-            print("train acc:",train_acc/batch_num)
-
+            print("train accuracy:",train_acc/batch_num)
+            html.append("第" + i + "次迭代：")
+            html.append("train loss:" + str(train_loss/batch_num))
+            html.append("train accuracy:" + str(train_acc/batch_num))
+            html.append(" ")
+        html.append("训练次数为：" + times + "，训练成功")
         #保存模型
         saver = tf.train.Saver()   
         saver.save(sess, os.path.dirname(__file__) + "/model_data/model")
         print("模型保存成功")
-    return True
+    return True, html
 
 

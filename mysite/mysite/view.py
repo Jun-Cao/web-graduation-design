@@ -12,7 +12,11 @@ def index(request):
 	return render(request, 'index.html', context)
 
 def postImg(request):
-	imgPath = os.path.dirname(__file__) + "\images"
+	imgPath = os.path.dirname(__file__) + "\..\static\save"
+
+	#清空存储识别图片的文件夹
+	shutil.rmtree(imgPath)
+	os.mkdir(imgPath)
 
 	if request.method == "POST":
 		myFile = request.FILES.get("img", None)
@@ -27,30 +31,34 @@ def postImg(request):
 		chunk = myFile.read()
 		destination.write(chunk)
 		destination.close()
-		res = recognize.recognition()
+		res = recognize.recognition()		
 
-		shutil.rmtree(imgPath)
-		os.mkdir(imgPath)
 		if len(res[0]) == len(res[1]):
+			arr = []
+			for i in range(len(res[0])):
+				data = [res[0][i], res[1][i]]
+				arr.append(data)
 			context = {
-				'len': range(len(res[0])),
-				'path': res[0],
-				'char': res[1]
+				'arr': arr
 			}
 			print(context)
 			return render(request, 'showRecon.html', context)
 		else:
-			return HttpResponse("识别错误")
+			context = {
+				'res': ["识别错误"]
+			}
+			return render(request, 'showResult.html', context)
 
 
 def train(request):
 	if request.POST:
 		times = request.POST['trainTimes']	#训练次数
-		res = build.main(times)
-		# context = {}
-		# context['times'] = times
-		if res:
-			return HttpResponse("训练次数为：" + times + "，训练成功")
+		boolean, html = build.main(times)
+		context = {
+			'res': html
+		}
+		if boolean:
+			return render(request, 'showResult.html', context)
 
 
 

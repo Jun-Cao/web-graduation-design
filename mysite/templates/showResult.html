@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>图片识别-结果展示</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/index.css">
+</head>
+<body>
+	<div class="show-box">
+		{% for item in res %}
+		<p>{{item}}</p>
+		{% endfor %}
+	</div>
+</body>
+</html>

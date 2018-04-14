@@ -10,12 +10,12 @@
 			<div class="header-item">image</div>
 			<div class="header-item">result</div>
 		</li>
-	{% for i in len %}
+	{% for item in arr %}
 		<li class="table-body">
 			<div class="body-item">
-				<img src={{path.counter0}}>
+				<img src={{item.0}} class="body-img">
 			</div>
-			<div class="body-item">{{char.counter0}}</div>
+			<div class="body-item">{{item.1}}</div>
 		</li>
 	{% endfor %}
 	</ul>
