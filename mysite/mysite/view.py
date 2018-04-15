@@ -21,7 +21,7 @@ def postImg(request):
 	if request.method == "POST":
 		# myFile = request.FILES.get("img", None)
 
-		myFiles = request.FILES.getlist('img')
+		myFiles =  request.FILES.getlist('img')
 		if myFiles == []:
 			context = {
 				'res': ["上传文件为空"]
