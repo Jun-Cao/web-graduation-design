@@ -74,7 +74,7 @@ def recognition():
     for data in dataArr:    #将结果添加到数组
         res = sess.run(results, feed_dict={x:data,y_:[]})
         res = str(res)
-        resArr.append(switch[res])
+        resArr.append(switch.get(res))
 
 
     both = [showArr, resArr]

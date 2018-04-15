@@ -19,18 +19,24 @@ def postImg(request):
 	os.mkdir(imgPath)
 
 	if request.method == "POST":
-		myFile = request.FILES.get("img", None)
+		# myFile = request.FILES.get("img", None)
 
-		if not myFile:
-			return HttpResponse("上传内容为空")
-		destination = open(os.path.join(imgPath, myFile.name), 'wb+')
+		myFiles = request.FILES.getlist('img')
+		if myFiles == []:
+			context = {
+				'res': ["上传文件为空"]
+			}
+			return render(request, 'showResult.html', context)
+		for myFile in myFiles:
+			
+			destination = open(os.path.join(imgPath, myFile.name), 'wb+')
 
-		# for chunk in myFile.chunks():
-		# 	destination.write(chunk) 
-		# destination.close()
-		chunk = myFile.read()
-		destination.write(chunk)
-		destination.close()
+			for chunk in myFile.chunks():
+				destination.write(chunk) 
+			destination.close()
+			# chunk = myFile.read()
+			# destination.write(chunk)
+			# destination.close()
 		res = recognize.recognition()		
 
 		if len(res[0]) == len(res[1]):
